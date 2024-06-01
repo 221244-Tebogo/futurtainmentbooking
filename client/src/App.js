@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Auth from "./components/Auth";
-import AdminUploadEvent from "./components/admin/uploadEvent/AdminUploadEvent";
+import AdminUploadEvent from "./components/admin/AdminUploadEvent";
 import ContactUs from "./routes/ContactUs/ContactUs";
-import AdminDashboard from "./components/admin/dashboard/AdminDashboard";
+import AdminDashboard from "./components/admin/AdminDashboard";
 import Home from "./routes/Home/Home";
-import UserEvents from "./routes/events/UserEvents";
+import UserEvents from "./routes/Events/UserEvents";
 import EventsFilter from "./routes/EventsFilter/EventsFilter";
 import EventDetails from "./routes/EventDetails/EventDetails";
 import Navbar from "./components/Navbar/Navbar";

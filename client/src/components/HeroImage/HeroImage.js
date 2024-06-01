@@ -1,23 +1,31 @@
+// HeroImage.jsx
+
 import React from "react";
 import "./HeroImage.css";
 
 export default function HeroImage() {
   return (
     <header className="hero-container">
-      <div className="p-5 text-center bg-image hero-image-container">
-        <div className="overlay"></div>
+      <div
+        className="p-5 text-center bg-image hero-image-container"
+        style={{
+          backgroundImage:
+            "url('https://www.suninternational.com/content/dam/approved/carnival-city/events/carn-rory-petzer-may-2024.jpg.sunimage.1920.525.jpg')",
+        }}
+      >
+        <div className="overlay"></div> {/* Add this line for overlay */}
         <div className="mask">
-          <div className="hero-text-container">
-            <h1 className="mb-3 main-heading">Find Your Furry Soulmate</h1>
-            <p className="mb-3">
-              Welcome to PawPrints, where finding your perfect furry companion
-              is just a swipe away! Our innovative platform connects animal
-              lovers with their ideal pets through a fun and intuitive matching
-              experience. Whether you're seeking a loyal canine companion, a
-              cuddly feline friend, or a quirky critter to complete your family,
-              PawPrint has you covered. Start swiping today and embark on a
-              heartwarming journey to find your forever fur-ever friend!
-            </p>
+          <div className="hero-container">
+            <div className="hero-text-container">
+              <h1 className="mb-3">Welcome to Futurtainment!</h1>
+              <p className="mb-3">
+                Discover and book your next great experience with Futurtainment!
+                Our platform offers a wide range of events, from concerts to
+                theater performances, and everything in between. Easily find and
+                book events that match your interests. Start exploring today and
+                never miss out on the fun!
+              </p>
+            </div>
           </div>
         </div>
       </div>

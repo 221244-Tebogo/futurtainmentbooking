@@ -5,12 +5,12 @@ import AdminUploadEvent from "./components/admin/AdminUploadEvent";
 import ContactUs from "./routes/ContactUs/ContactUs";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import Home from "./routes/Home/Home";
-import UserEvents from "./routes/Events/UserEvents"; // Correcting the path
+import UserEvents from "./routes/Events/UserEvents";
 import EventsFilter from "./routes/EventsFilter/EventsFilter";
 import EventDetails from "./routes/EventDetails/EventDetails";
 import Navbar from "./components/Navbar/Navbar";
-import AdminLayout from "./components/admin/AdminLayout"; // Import AdminLayout
-import UserLayout from "./components/UserLayout"; // Import UserLayout for client
+import AdminLayout from "./components/admin/AdminLayout";
+import UserLayout from "./components/UserLayout";
 
 function App() {
   return (
@@ -19,8 +19,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Auth />} />
-          <Route path="/upload-event" element={<AdminUploadEvent />} />
-          <Route path="/admin/*" element={<AdminDashboard />} />
+          <Route path="/admin/*" element={<AdminLayout />} />
           <Route path="/home" element={<Home />} />
           <Route path="/events" element={<UserEvents />} />
           <Route path="/contact-us" element={<ContactUs />} />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Reports.css"; // Ensure to create a CSS file for Reports styling
+// import "./Reports.css"; // Ensure to create a CSS file for Reports styling
 
 const Reports = () => {
   const [sales, setSales] = useState([]);

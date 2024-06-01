@@ -1,53 +1,51 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Dashboard.css";
+import AdminUploadEvent from "./AdminUploadEvent";
 
 const AdminDashboard = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await axios.get("http://localhost:5001/api/events");
+        setEvents(response.data);
+      } catch (error) {
+        console.error("Error fetching events", error);
+      }
+    };
     fetchEvents();
   }, []);
 
-  const fetchEvents = async () => {
-    try {
-      const response = await axios.get("http://localhost:5001/api/events");
-      setEvents(response.data);
-    } catch (error) {
-      console.error("Error fetching events", error);
-    }
-  };
-
   return (
-    <div className="dashboard-container">
-      <h2>Welcome to the Admin Dashboard</h2>
-      <div className="dashboard-tables">
-        <h3>All Events</h3>
-        <table className="dashboard-table">
-          <thead>
-            <tr>
-              <th>Event Name</th>
-              <th>Category</th>
-              <th>Time</th>
-              <th>Seats</th>
-              <th>Venue</th>
-              <th>Ticket Price</th>
+    <div>
+      <h1>Admin Dashboard</h1>
+      <AdminUploadEvent />
+      <h2>Existing Events</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Event Name</th>
+            <th>Category</th>
+            <th>Time</th>
+            <th>Seats</th>
+            <th>Venue</th>
+            <th>Ticket Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {events.map((event) => (
+            <tr key={event._id}>
+              <td>{event.eventName}</td>
+              <td>{event.eventCategory}</td>
+              <td>{event.time}</td>
+              <td>{event.seats}</td>
+              <td>{event.venue}</td>
+              <td>{event.ticketPrice}</td>
             </tr>
-          </thead>
-          <tbody>
-            {events.map((event) => (
-              <tr key={event._id}>
-                <td>{event.eventName}</td>
-                <td>{event.eventCategory}</td>
-                <td>{event.time}</td>
-                <td>{event.seats}</td>
-                <td>{event.venue}</td>
-                <td>{event.ticketPrice}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

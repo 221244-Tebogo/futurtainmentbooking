@@ -1,9 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import AdminUploadEvent from "./AdminUploadEvent"; // Correct path
-import AdminDashboard from "./AdminDashboard"; // Correct path
-import VerticalNav from "./Nav/VerticalNav"; // Import VerticalNav
-import Users from "./users/Users"; // Import Users
+import AdminDashboard from "./AdminDashboard";
+import VerticalNav from "./Nav/VerticalNav";
+import Users from "./users/Users";
+import Reports from "./Reports";
+import AdminUploadEvent from "./AdminUploadEvent";
 
 const AdminLayout = () => {
   return (
@@ -13,6 +14,8 @@ const AdminLayout = () => {
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="upload-event" element={<AdminUploadEvent />} />
         <Route path="users" element={<Users />} />
+        <Route path="reports" element={<Reports />} />{" "}
+        {/* Assuming you have this component */}
         <Route path="home" element={<AdminDashboard />} />{" "}
         {/* Correct admin home path */}
       </Routes>

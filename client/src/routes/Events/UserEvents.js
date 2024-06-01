@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Events.css";
-import EventCard from "../../components/EventCard/EventCard";
 
 const UserEvents = () => {
   const [events, setEvents] = useState([]);
-  const [filteredEvents, setFilteredEvents] = useState([]);
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         const response = await axios.get("http://localhost:5001/api/events");
         setEvents(response.data);
-        setFilteredEvents(response.data); // Initially set filtered events to all events
       } catch (error) {
         console.error("Error fetching events", error);
       }
@@ -20,41 +16,14 @@ const UserEvents = () => {
     fetchEvents();
   }, []);
 
-  const handleFilter = (category) => {
-    if (category === "All") {
-      setFilteredEvents(events); // Show all events
-    } else {
-      const filtered = events.filter(
-        (event) => event.eventCategory.toLowerCase() === category.toLowerCase()
-      );
-      setFilteredEvents(filtered);
-    }
-  };
-
   return (
     <div>
-      <div className="all-events">
-        <h2>Upcoming Events</h2>
-        <div className="filter-buttons">
-          <button onClick={() => handleFilter("All")}>All</button>
-          <button onClick={() => handleFilter("Entertainment(Tickets)")}>
-            Entertainment(Tickets)
-          </button>
-          <button onClick={() => handleFilter("Music")}>Music</button>
-          <button onClick={() => handleFilter("Kids events")}>
-            Kids events
-          </button>
-          <button onClick={() => handleFilter("Comedy")}>Comedy</button>
-          <button onClick={() => handleFilter("Fashion shows")}>
-            Fashion shows
-          </button>
-        </div>
-        <div className="event-cards">
-          {filteredEvents.map((event) => (
-            <EventCard key={event._id} event={event} />
-          ))}
-        </div>
-      </div>
+      <h1>Events</h1>
+      <ul>
+        {events.map((event) => (
+          <li key={event._id}>{event.eventName}</li>
+        ))}
+      </ul>
     </div>
   );
 };

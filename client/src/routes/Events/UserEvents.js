@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import EventCard from "../../components/EventCard/EventCar
 
 const UserEvents = () => {
   const [events, setEvents] = useState([]);
@@ -19,11 +20,15 @@ const UserEvents = () => {
   return (
     <div>
       <h1>Events</h1>
-      <ul>
+      <div className="event-cards">
         {events.map((event) => (
-          <li key={event._id}>{event.eventName}</li>
+          <EventCard
+            key={event._id}
+            event={event}
+            userId={localStorage.getItem("userId")}
+          />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

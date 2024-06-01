@@ -1,31 +1,22 @@
-//UPLOADS EVENT
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const AdminUploadEvent = () => {
   const [formData, setFormData] = useState({
-    eventName: "",
-    eventCategory: "Entertainment(Tickets)",
+    title: "",
+    description: "",
+    date: "",
     time: "",
-    seats: "",
     venue: "",
+    seats: "",
     ticketPrice: "",
   });
   const [eventCount, setEventCount] = useState(0);
   const maxEvents = 5;
 
-  const eventCategories = [
-    "Entertainment(Tickets)",
-    "Music",
-    "Kids events",
-    "Comedy",
-    "Fashion shows",
-  ];
-
-  const handleCategoryChange = (e) => {
-    const { value } = e.target;
-    setFormData({ ...formData, eventCategory: value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   useEffect(() => {
@@ -41,11 +32,6 @@ const AdminUploadEvent = () => {
     };
     fetchEventCount();
   }, []);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,29 +54,33 @@ const AdminUploadEvent = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>Event Name</label>
+        <label>Event Title</label>
         <input
           type="text"
-          name="eventName"
-          value={formData.eventName}
+          name="title"
+          value={formData.title}
           onChange={handleChange}
           required
         />
       </div>
       <div>
-        <label>Event Category</label>
-        <select
-          name="eventCategory"
-          value={formData.eventCategory}
-          onChange={handleCategoryChange}
+        <label>Description</label>
+        <textarea
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
           required
-        >
-          {eventCategories.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
+        />
+      </div>
+      <div>
+        <label>Date</label>
+        <input
+          type="date"
+          name="date"
+          value={formData.date}
+          onChange={handleChange}
+          required
+        />
       </div>
       <div>
         <label>Time</label>

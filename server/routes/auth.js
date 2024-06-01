@@ -9,7 +9,6 @@ const router = express.Router();
 router.post("/register", async (req, res) => {
   const { name, surname, email, password, role } = req.body;
 
-  // Validate request body
   if (
     !name ||
     !surname ||
@@ -21,7 +20,6 @@ router.post("/register", async (req, res) => {
   }
 
   try {
-    // Check if the user already exists in the User or Admin collection
     let user = await User.findOne({ email });
     let admin = await Admin.findOne({ email });
 
@@ -29,7 +27,6 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    // If email ends with '@futurtainment.com', add to Admin collection
     if (email.endsWith("@futurtainment.com")) {
       const newAdmin = new Admin({ name, surname, email, password });
 
@@ -45,7 +42,6 @@ router.post("/register", async (req, res) => {
       });
     }
 
-    // Otherwise, add to User collection
     user = new User({ name, surname, email, password, role });
 
     const salt = await bcrypt.genSalt(10);
@@ -58,7 +54,7 @@ router.post("/register", async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.json({ user, token, redirect: "/home" }); // Redirect normal users to Home
+    res.json({ user, token, redirect: "/home" });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server error");
@@ -68,17 +64,14 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  // Validate request body
   if (!email || !password) {
     return res.status(400).json({ message: "Please enter all fields" });
   }
 
   try {
-    // Check if the user exists in the User or Admin collection
     let user = await User.findOne({ email });
     let admin = await Admin.findOne({ email });
 
-    // If the user is an admin
     if (admin) {
       const isMatch = await bcrypt.compare(password, admin.password);
       if (!isMatch) {
@@ -93,7 +86,6 @@ router.post("/login", async (req, res) => {
       return res.json({ user: admin, token, redirect: "/admin/home" });
     }
 
-    // If the user is a regular user
     if (user) {
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
@@ -105,10 +97,9 @@ router.post("/login", async (req, res) => {
         expiresIn: "1h",
       });
 
-      return res.json({ user, token, redirect: "/home" }); // Redirect normal users to Home
+      return res.json({ user, token, redirect: "/home" });
     }
 
-    // If no user is found in either collection
     return res.status(400).json({ message: "Invalid credentials" });
   } catch (error) {
     console.error(error.message);

@@ -1,19 +1,52 @@
 const mongoose = require("mongoose");
 
+const commentSchema = new mongoose.Schema({
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  text: { type: String, required: true },
+  date: { type: Date, default: Date.now },
+});
+
 const eventSchema = new mongoose.Schema({
-  eventName: { type: String, required: true },
-  eventCategory: { type: String, required: true },
-  time: { type: String, required: true },
-  seats: { type: Number, required: true },
-  venue: { type: String, required: true },
-  ticketPrice: { type: Number, required: true },
-  likedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  comments: [
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    required: true,
+  },
+  time: {
+    type: String,
+    required: true,
+  },
+  venue: {
+    type: String,
+    required: true,
+  },
+  seats: {
+    type: Number,
+    required: true,
+  },
+  ticketPrice: {
+    type: Number,
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: ["scheduled", "cancelled"],
+    default: "scheduled",
+  },
+  likedUsers: [
     {
-      name: { type: String, required: true },
-      comment: { type: String, required: true },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
   ],
+  comments: [commentSchema],
 });
 
 module.exports = mongoose.model("Event", eventSchema);

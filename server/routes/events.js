@@ -2,37 +2,56 @@ const express = require("express");
 const router = express.Router();
 const Event = require("../models/Event");
 
-// Fetch all events
+// Add a new event
+router.post("/add", async (req, res) => {
+  try {
+    const event = new Event(req.body);
+    await event.save();
+    res.status(201).send(event);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// Delete an event
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    const event = await Event.findByIdAndDelete(req.params.id);
+    if (!event) {
+      return res.status(404).send();
+    }
+    res.send(event);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// Cancel an event
+router.patch("/cancel/:id", async (req, res) => {
+  try {
+    const event = await Event.findByIdAndUpdate(
+      req.params.id,
+      { status: "cancelled" },
+      { new: true, runValidators: true }
+    );
+    if (!event) {
+      return res.status(404).send();
+    }
+    res.send(event);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// Get all events
 router.get("/", async (req, res) => {
   try {
-    const events = await Event.find();
-    res.json(events);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
-// Like an event
-router.post("/like/:id", async (req, res) => {
-  try {
-    const event = await Event.findById(req.params.id);
-    event.likedUsers.push(req.body.userId); // Assuming userId is passed in the request body
-    await event.save();
-    res.json(event);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
-// Comment on an event
-router.post("/comment/:id", async (req, res) => {
-  try {
-    const event = await Event.findById(req.params.id);
-    event.comments.push(req.body); // Assuming comment is passed in the request body
-    await event.save();
-    res.json(event);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    const events = await Event.find({})
+      .populate("likedUsers")
+      .populate("comments.user");
+    res.send(events);
+  } catch (error) {
+    res.status(500).send(error);
   }
 });
 

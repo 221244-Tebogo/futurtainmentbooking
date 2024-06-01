@@ -1,5 +1,4 @@
 /* Global styles for HTML, body, and root */
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
 html,
 body,
@@ -7,7 +6,7 @@ body,
   height: 100%;
   width: 100%;
   font-family: 'Poppins', sans-serif;
-  background: radial-gradient(circle, #cbe6f867 0%, #8aaec653 65%), url('./assets/images/Pawsbackground.png');
+  background: white;
   background-size: cover;
 }
 

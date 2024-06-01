@@ -32,9 +32,6 @@ body {
 
 }
 
-/* .row {
-
-} */
 
 
 .content {
@@ -65,4 +62,5 @@ h5 {
   margin-left: 250px; 
   padding: 20px; 
   height: 100%; 
+  background-color: #f1d0cf;
 }

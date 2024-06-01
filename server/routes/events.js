@@ -13,6 +13,21 @@ router.post("/add", async (req, res) => {
   }
 });
 
+// Update an event
+router.patch("/update/:id", async (req, res) => {
+  try {
+    const event = await Event.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!event) {
+      return res.status(404).send();
+    }
+    res.send(event);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 // Delete an event
 router.delete("/delete/:id", async (req, res) => {
   try {
@@ -26,29 +41,10 @@ router.delete("/delete/:id", async (req, res) => {
   }
 });
 
-// Cancel an event
-router.patch("/cancel/:id", async (req, res) => {
-  try {
-    const event = await Event.findByIdAndUpdate(
-      req.params.id,
-      { status: "cancelled" },
-      { new: true, runValidators: true }
-    );
-    if (!event) {
-      return res.status(404).send();
-    }
-    res.send(event);
-  } catch (error) {
-    res.status(400).send(error);
-  }
-});
-
 // Get all events
 router.get("/", async (req, res) => {
   try {
-    const events = await Event.find({})
-      .populate("likedUsers")
-      .populate("comments.user");
+    const events = await Event.find({});
     res.send(events);
   } catch (error) {
     res.status(500).send(error);

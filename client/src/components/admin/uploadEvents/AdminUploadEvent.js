@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const UploadEvent = () => {
+const AdminUploadEvent = () => {
   const [formData, setFormData] = useState({
     eventName: "",
     eventCategory: "Entertainment(Tickets)",
@@ -27,7 +27,6 @@ const UploadEvent = () => {
   };
 
   useEffect(() => {
-    // Fetch current number of events from the backend (example URL)
     const fetchEventCount = async () => {
       try {
         const response = await axios.get(
@@ -53,7 +52,6 @@ const UploadEvent = () => {
       return;
     }
     try {
-      // Handle form submission
       await axios.post("http://localhost:5001/api/events", formData);
       setEventCount(eventCount + 1);
       alert("Event uploaded successfully!");
@@ -87,11 +85,6 @@ const UploadEvent = () => {
               {category}
             </option>
           ))}
-          {formData.eventCategory === "Music" && (
-            <option value="South African Music for 21-35 years">
-              South African Music for 21-35 years
-            </option>
-          )}
         </select>
       </div>
       <div>
@@ -141,7 +134,152 @@ const UploadEvent = () => {
   );
 };
 
-export default UploadEvent;
+export default AdminUploadEvent;
+
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+
+// const UploadEvent = () => {
+//   const [formData, setFormData] = useState({
+//     eventName: "",
+//     eventCategory: "Entertainment(Tickets)",
+//     time: "",
+//     seats: "",
+//     venue: "",
+//     ticketPrice: "",
+//   });
+//   const [eventCount, setEventCount] = useState(0);
+//   const maxEvents = 5;
+
+//   const eventCategories = [
+//     "Entertainment(Tickets)",
+//     "Music",
+//     "Kids events",
+//     "Comedy",
+//     "Fashion shows",
+//   ];
+
+//   const handleCategoryChange = (e) => {
+//     const { value } = e.target;
+//     setFormData({ ...formData, eventCategory: value });
+//   };
+
+//   useEffect(() => {
+//     // Fetch current number of events from the backend (example URL)
+//     const fetchEventCount = async () => {
+//       try {
+//         const response = await axios.get(
+//           "http://localhost:5001/api/events/count"
+//         );
+//         setEventCount(response.data.count);
+//       } catch (error) {
+//         console.error("Error fetching event count", error);
+//       }
+//     };
+//     fetchEventCount();
+//   }, []);
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({ ...formData, [name]: value });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     if (eventCount >= maxEvents) {
+//       alert("Maximum number of events reached. You cannot upload more events.");
+//       return;
+//     }
+//     try {
+//       // Handle form submission
+//       await axios.post("http://localhost:5001/api/events", formData);
+//       setEventCount(eventCount + 1);
+//       alert("Event uploaded successfully!");
+//     } catch (error) {
+//       console.error("Error uploading event", error);
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <div>
+//         <label>Event Name</label>
+//         <input
+//           type="text"
+//           name="eventName"
+//           value={formData.eventName}
+//           onChange={handleChange}
+//           required
+//         />
+//       </div>
+//       <div>
+//         <label>Event Category</label>
+//         <select
+//           name="eventCategory"
+//           value={formData.eventCategory}
+//           onChange={handleCategoryChange}
+//           required
+//         >
+//           {eventCategories.map((category) => (
+//             <option key={category} value={category}>
+//               {category}
+//             </option>
+//           ))}
+//           {formData.eventCategory === "Music" && (
+//             <option value="South African Music for 21-35 years">
+//               South African Music for 21-35 years
+//             </option>
+//           )}
+//         </select>
+//       </div>
+//       <div>
+//         <label>Time</label>
+//         <input
+//           type="text"
+//           name="time"
+//           value={formData.time}
+//           onChange={handleChange}
+//           required
+//         />
+//       </div>
+//       <div>
+//         <label>Seats Numbers</label>
+//         <input
+//           type="number"
+//           name="seats"
+//           value={formData.seats}
+//           onChange={handleChange}
+//           required
+//           min="100"
+//           max="500"
+//         />
+//       </div>
+//       <div>
+//         <label>Venue</label>
+//         <input
+//           type="text"
+//           name="venue"
+//           value={formData.venue}
+//           onChange={handleChange}
+//           required
+//         />
+//       </div>
+//       <div>
+//         <label>Ticket Price</label>
+//         <input
+//           type="number"
+//           name="ticketPrice"
+//           value={formData.ticketPrice}
+//           onChange={handleChange}
+//           required
+//         />
+//       </div>
+//       <button type="submit">Upload Event</button>
+//     </form>
+//   );
+// };
+
+// export default UploadEvent;
 
 // import React, { useState, useEffect } from "react";
 // import axios from "axios";

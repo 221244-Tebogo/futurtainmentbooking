@@ -1,35 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Dashboard.css"; // Ensure to create the corresponding CSS
+import "./Dashboard.css";
 
-const Dashboard = () => {
-  const [users, setUsers] = useState([]);
-  const [reports, setReports] = useState([]); // Assuming there's an endpoint for reports
+const AdminDashboard = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    fetchUsers();
-    fetchReports();
     fetchEvents();
   }, []);
-
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get("http://localhost:5001/api/users");
-      setUsers(response.data);
-    } catch (error) {
-      console.error("Error fetching users", error);
-    }
-  };
-
-  const fetchReports = async () => {
-    try {
-      const response = await axios.get("http://localhost:5001/api/reports");
-      setReports(response.data);
-    } catch (error) {
-      console.error("Error fetching reports", error);
-    }
-  };
 
   const fetchEvents = async () => {
     try {
@@ -43,147 +21,40 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <h2>Welcome to the Admin Dashboard</h2>
-      <div className="dashboard-blocks">
-        <div className="dashboard-block">
-          <h3>Users</h3>
-          <p>{users.length} Users</p>
-        </div>
-        <div className="dashboard-block">
-          <h3>Reports</h3>
-          <p>{reports.length} Reports</p>
-        </div>
-        <div className="dashboard-block">
-          <h3>Events</h3>
-          <p>{events.length} Events</p>
-        </div>
-      </div>
       <div className="dashboard-tables">
-        <h3>All Registered Users</h3>
+        <h3>All Events</h3>
         <table className="dashboard-table">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
+              <th>Event Name</th>
+              <th>Category</th>
+              <th>Time</th>
+              <th>Seats</th>
+              <th>Venue</th>
+              <th>Ticket Price</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user._id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.role}</td>
+            {events.map((event) => (
+              <tr key={event._id}>
+                <td>{event.eventName}</td>
+                <td>{event.eventCategory}</td>
+                <td>{event.time}</td>
+                <td>{event.seats}</td>
+                <td>{event.venue}</td>
+                <td>{event.ticketPrice}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="events-container">
-        <h3>Events</h3>
-        <div className="events-grid">
-          {events.map((event) => (
-            <div className="card event-card" key={event._id}>
-              <div className="card-header">
-                <div className="media">
-                  <img
-                    className="mr-3 img-fluid"
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAb1BMVEW8vLyurq4pKSmYmJhFRUU/Pz+oqKhXV1dNTU21tbWdnZ1kZGRbW1uRkZGpqalzc3OUlJRGRkZISEivr69SUlK2trYsLCx1dXVMTEwcHBw0NDRfX198fHxPT0+ZmZlCQkJAQECioqJQUFCcnJz+/v7wLOrbAAAAAWJLR0QktAb5mQAAAGVJREFUOMvt0DcOgDAQRNEhmGSSAZMz978jrIRoMC0Iyb96xWiLBXS6n2eYls2ck7h8z2WeH/AwsuODIKt3SSoy5IUsKyLI6iGrm1YGPG87Yj/Ip4uAGKc5rpd1Owjy11/T6V5rB6aHBJ+HAxDyAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE4LTA3LTI1VDA5OjI2OjM2LTA1OjAw+V5dzQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxOC0wNy0yNVQwOToyNjozNi0wNTowMIgD5XEAAAAASUVORK5CYII="
-                    alt="John Duo"
-                  />
-                  <div className="media-body">
-                    <h3 className="mt-0">By {event.organizer}</h3>
-                    <p>5 min ago</p>
-                  </div>
-                  <div className="custom-dropdown dropdown">
-                    <div
-                      className="dropdown-toggle"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      <i className="fa fa-ellipsis-v"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="event-card-img">
-                <img
-                  className="img-fluid"
-                  src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/wAALCADmAXIBAREA/8QAHQABAAICAwEBAAAAAAAAAAAAAAcIBgkCAwQFAf/EAEIQAAEDBAEDAgMEBgYJBQAAAAABAgMEBQYRBwgSIRMxCUFRFCIyYRUjQlJicRYYGSRWcxczWIGRlKGx1JKWorLT/9oACAEBAAA/ALQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//2Q=="
-                  alt="Event Image"
-                />
-                <h4>{event.name}</h4>
-              </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-auto">
-                    <h5>Date</h5>
-                    <p>{new Date(event.date).toLocaleDateString()}</p>
-                  </div>
-                  <div className="col-auto">
-                    <h5>Location</h5>
-                    <p>{event.location}</p>
-                  </div>
-                  <div className="col-auto">
-                    <h5>Tickets</h5>
-                    <p>Available {event.ticketsAvailable}</p>
-                  </div>
-                </div>
-              </div>
-              <div className="card-sponsor">
-                <div className="row justify-content-between">
-                  <div className="col-auto">
-                    <h4>Sponsor by</h4>
-                    <div className="card-sponsor-img">
-                      <a href="#">
-                        <img
-                          className="img-fluid"
-                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeBAMAAADJHrORAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAMFBMVEW8vLyAgIBycnJ3d3dvb2+1tbViYmJ5eXl4eHhzc3N6enqCgoJpaWlxcXF2dnb+/v6NdmrhAAAAAWJLR0QPGLoA2QAAACJJREFUGNNjYBiOQMgEhBAgrGJWWAUSf8/aeXvWDrQj6QIA1CYGM/FuhKoAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTgtMDctMjVUMDk6MjY6MzYtMDU6MDD5Xl3NAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE4LTA3LTI1VDA5OjI2OjM2LTA1OjAwiAPlcQAAAABJRU5ErkJggg=="
-                          alt="Sponsor"
-                        />
-                      </a>
-                    </div>
-                  </div>
-                  <div className="col-auto">
-                    <p>${event.price}</p>
-                  </div>
-                </div>
-              </div>
-              <div className="card-footer">
-                <ul>
-                  <li>
-                    <a href="#">
-                      {" "}
-                      <i className="fa fa-heart"></i>126{" "}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      {" "}
-                      <i className="fa fa-comment"></i>03{" "}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="fa fa-sign-out"></i>
-                    </a>
-                  </li>
-                </ul>
-                <div className="pull-right">
-                  <a href="#">
-                    {" "}
-                    <i className="fa fa-bar-chart"></i>Insights
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default AdminDashboard;
+
+//old
 
 // import React, { useState, useEffect } from "react";
 // import { Route, Routes, Link } from "react-router-dom";

@@ -2,13 +2,13 @@
 import React from "react";
 import "./Home.css";
 import HeroImage from "../../components/HeroImage/HeroImage";
-import ImageGallery from "../../components/ImageGallery/ImageGallery";
+// import ImageGallery from "../../components/ImageGallery/ImageGallery";
 
 const Home = () => {
   return (
     <div style={{}}>
       <HeroImage />
-      <ImageGallery />
+      {/* <ImageGallery /> */}
     </div>
   );
 };

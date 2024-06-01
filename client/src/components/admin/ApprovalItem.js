@@ -1,5 +1,5 @@
-import React from 'react';
-import './ApprovalItem.css';
+import React from "react";
+import "./ApprovalItem.css";
 
 const ApprovalItem = ({ username, pet, description }) => {
   return (

@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Auth from "./components/Auth";
-import AdminUploadEvent from "./components/admin/uploadEvent/AdminUploadEvent";
+import AdminUploadEvent from "./components/admin/AdminUploadEvent";
 import ContactUs from "./routes/ContactUs/ContactUs";
-import AdminDashboard from "./components/admin/dashboard/AdminDashboard";
+import AdminDashboard from "./components/admin/AdminDashboard";
 import Home from "./routes/Home/Home";
-import UserEvents from "./routes/events/UserEvents";
+import UserEvents from "./routes/Events/UserEvents"; // Correcting the path
 import EventsFilter from "./routes/EventsFilter/EventsFilter";
 import EventDetails from "./routes/EventDetails/EventDetails";
 import Navbar from "./components/Navbar/Navbar";
@@ -19,8 +19,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Auth />} />
-          <Route path="/admin/*" element={<AdminLayout />} />{" "}
-          {/* Use AdminLayout for admin routes */}
+          <Route path="/upload-event" element={<AdminUploadEvent />} />
+          <Route path="/admin/*" element={<AdminDashboard />} />
           <Route path="/home" element={<Home />} />
           <Route path="/events" element={<UserEvents />} />
           <Route path="/contact-us" element={<ContactUs />} />
@@ -37,6 +37,44 @@ function App() {
 }
 
 export default App;
+
+// import React from "react";
+// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import Auth from "./components/Auth";
+// import AdminUploadEvent from "./components/admin/AdminUploadEvent";
+// import ContactUs from "./routes/ContactUs/ContactUs";
+// import AdminDashboard from "./components/admin/AdminDashboard";
+// import Home from "./routes/Home/Home";
+// import UserEvents from "./routes/Events/UserEvents";
+// import EventsFilter from "./routes/EventsFilter/EventsFilter";
+// import EventDetails from "./routes/EventDetails/EventDetails";
+// import Navbar from "./components/Navbar/Navbar";
+
+// function App() {
+//   return (
+//     <Router>
+//       <div className="App">
+//         <Navbar />
+//         <Routes>
+//           <Route path="/" element={<Auth />} />
+//           <Route path="/upload-event" element={<AdminUploadEvent />} />
+//           <Route path="/admin/*" element={<AdminDashboard />} />
+//           <Route path="/home" element={<Home />} />
+//           <Route path="/events" element={<UserEvents />} />
+//           <Route path="/contact-us" element={<ContactUs />} />
+//           <Route path="/eventsfilter/:type" element={<EventsFilter />} />
+//           <Route path="/eventdetails/:id" element={<EventDetails />} />
+//           <Route
+//             path="/unauthorized"
+//             element={<div>Unauthorized Access</div>}
+//           />
+//         </Routes>
+//       </div>
+//     </Router>
+//   );
+// }
+
+// export default App;
 
 // import React from "react";
 // import { BrowserRouter as Router, Route, Routes } from "react-router-dom";

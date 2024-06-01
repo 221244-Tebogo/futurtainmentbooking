@@ -82,7 +82,7 @@ Another area where we would like to expand and enhance the project is in making 
 
 Final Outcome
 Mockup Video
-[Link to the mockup video]
+[[[Link to the mockup video](https://drive.google.com/file/d/1xc1BfbJyt0RKCqGUOc_Suw_nNvE3FoPk/view?usp=drive_link)]](https://drive.google.com/file/d/1xc1BfbJyt0RKCqGUOc_Suw_nNvE3FoPk/view?usp=drive_link)
 
 Conclusion
 This project has been an incredible learning experience for us, and we are truly grateful for the opportunity to work on it. Throughout the course of the project, we have learned so much, from technical skills to project management and collaboration.

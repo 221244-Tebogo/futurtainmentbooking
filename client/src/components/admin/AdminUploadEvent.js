@@ -1,3 +1,4 @@
+// Rename this file to AdminUploadEvent.js and place it in the correct folder.
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -52,7 +53,10 @@ const AdminUploadEvent = () => {
       return;
     }
     try {
-      await axios.post("http://localhost:5001/api/events", formData);
+      await axios.post(
+        "http://localhost:5001/api/admin/upload-event",
+        formData
+      ); // Adjusted URL
       setEventCount(eventCount + 1);
       alert("Event uploaded successfully!");
     } catch (error) {

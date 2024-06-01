@@ -1,14 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Auth from "./components/Auth";
-import AdminUploadEvent from "./components/admin/AdminUploadEvent";
+import AdminUploadEvent from "./components/admin/uploadEvent/AdminUploadEvent";
 import ContactUs from "./routes/ContactUs/ContactUs";
-import AdminDashboard from "./components/admin/AdminDashboard";
+import AdminDashboard from "./components/admin/dashboard/AdminDashboard";
 import Home from "./routes/Home/Home";
-import UserEvents from "./routes/Events/UserEvents";
+import UserEvents from "./routes/events/UserEvents";
 import EventsFilter from "./routes/EventsFilter/EventsFilter";
 import EventDetails from "./routes/EventDetails/EventDetails";
 import Navbar from "./components/Navbar/Navbar";
+import AdminLayout from "./components/admin/AdminLayout"; // Import AdminLayout
+import UserLayout from "./components/UserLayout"; // Import UserLayout for client
 
 function App() {
   return (
@@ -17,8 +19,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Auth />} />
-          <Route path="/upload-event" element={<AdminUploadEvent />} />
-          <Route path="/admin/*" element={<AdminDashboard />} />
+          <Route path="/admin/*" element={<AdminLayout />} />{" "}
+          {/* Use AdminLayout for admin routes */}
           <Route path="/home" element={<Home />} />
           <Route path="/events" element={<UserEvents />} />
           <Route path="/contact-us" element={<ContactUs />} />

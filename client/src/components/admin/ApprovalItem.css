@@ -1,0 +1,40 @@
+.approval-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .approval-item-info {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .approval-item-username,
+  .approval-item-pet,
+  .approval-item-description {
+    font-size: 16px;
+  }
+  
+  .approval-item-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .approve-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  

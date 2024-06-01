@@ -1,0 +1,25 @@
+.vertical-nav {
+  width: 200px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #333;
+  padding-top: 20px;
+}
+
+.vertical-nav .logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.vertical-nav a {
+  display: block;
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+
+.vertical-nav a:hover {
+  background-color: #575757;
+}

@@ -1,0 +1,26 @@
+.all-pets {
+    padding: 20px;
+}
+
+.pet-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.pet-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    width: 200px;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pet-card h3 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.pet-card p {
+    margin: 5px 0;
+}

@@ -1,0 +1,61 @@
+@import "../../index.css";
+
+.main {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    height: 15vh;
+    align-items: center;
+    border-bottom-width: 1px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.main .logoImg {
+    max-width: 10vw;
+}
+
+.links {
+    height: 100%;
+    width: 60vw;
+    display: flex;
+    margin-left: auto;
+    gap: 3vw;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.links .link {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+    color: #464646;
+    border: 0px solid #0095D5;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+.links .link:hover {
+    border-bottom-width: 5px;
+}
+
+.links .link:active {
+    background-color: #8AAEC6;
+    border-color: #0095D5;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.welcome {
+    display: flex;
+    margin-left: auto;
+    font-size: 12px;
+}
